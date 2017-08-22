@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TypeFamilies #-}
 
 module Pangraph (
     -- * Abstract Types
@@ -28,6 +29,8 @@ import Data.Maybe            (mapMaybe, isJust)
 import Data.Map.Strict       (Map)
 import qualified Data.Map.Strict  as Map
 import qualified Data.ByteString  as BS
+import qualified Algebra.Graph.Class as Alga
+
 {-| The 'Pangraph' type is abstract and the core intermediate type between abstract representations of graphs. -}
 data Pangraph = Pangraph
   { vertices' :: Map VertexID Vertex
@@ -66,6 +69,10 @@ instance Show Vertex where
 
 instance Show Edge where
   show (Edge _ as e) = unwords ["makeEdge", show as, show e]
+
+instance Alga.ToGraph Pangraph where
+    type ToVertex Pangraph = Vertex
+    toGraph p = Alga.graph (vertices p) (map edgeEndpoints $ edges p)
 
 -- * List based constructors
 
