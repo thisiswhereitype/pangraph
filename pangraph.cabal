@@ -16,6 +16,7 @@ tested-with:          GHC==8.0.2
 library
   hs-source-dirs:     src
   exposed-modules:    Pangraph
+                   ,  Pangraph.AlgebraicGraphs
                    ,  Pangraph.GraphML.Parser
                    ,  Pangraph.GraphML.Writer
                    ,  Pangraph.VHDL.Writer
@@ -28,6 +29,7 @@ library
                    ,  bytestring
                    ,  hexml
                    ,  containers
+                   ,  algebraic-graphs
   default-language:   Haskell2010
   GHC-options:        -Wall -fwarn-tabs -O2
 
